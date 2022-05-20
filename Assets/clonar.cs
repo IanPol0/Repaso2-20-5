@@ -9,6 +9,7 @@ public class clonar : MonoBehaviour
     public int counter;
     public Text inputCloneAmount;
     public Text ClonesLeft;
+    public InputField ifield;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +26,26 @@ public class clonar : MonoBehaviour
 
     public void ClonePrefab()
     {
-        if (counter < int.Parse(inputCloneAmount.text))
+
+        if (inputCloneAmount.text != "")
         {
-            Instantiate(prefab);
-            counter++;
-            ClonesLeft.text = (int.Parse(inputCloneAmount.text) - counter).ToString();
+            ifield.readOnly = true;
+            int cantLimite = int.Parse(inputCloneAmount.text);
+
+            if (counter < cantLimite)
+            {
+                Instantiate(prefab);
+                counter++;
+                ClonesLeft.text = (cantLimite - counter).ToString();
+            }
+            else ClonesLeft.text = "No hay más";
         }
+
+        else
+        {
+            ClonesLeft.text = "ERROR. Ingrese un valor";
+        }
+        
 
     }
 
